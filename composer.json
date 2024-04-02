@@ -14,7 +14,8 @@
         "symfony/http-client": "6.4.*",
         "symfony/runtime": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
-        "symfony/yaml": "6.4.*"
+        "symfony/yaml": "6.4.*",
+        "voku/html-min": "^4.5"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.57"

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpClient\HttpClient;
+use voku\helper\HtmlMin;
 
 class BrowserController extends AbstractController
 {
@@ -42,10 +43,12 @@ class BrowserController extends AbstractController
         // Get the content of the response
         $content = $response->getContent();
 
-        // Remove all script tags from the HTML string
-        //$clean_content = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $content); // this was too much
-
+        // We will store the cleaned html in a new variable
         $cleanContent = $content;
+
+        // Minify HTML content
+        $htmlMinifier = new HtmlMin();
+        $cleanContent = $htmlMinifier->minify($cleanContent);
 
         // Let's remove all the script and style tags that were injected by WholeSale AllInOne app
         $cleanContent = $this->removeTagIfContains($cleanContent, '<script', '</script', 'WSAIO.');
