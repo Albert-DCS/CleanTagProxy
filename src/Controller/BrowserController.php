@@ -11,6 +11,8 @@ class BrowserController extends AbstractController
     #[Route('/browser', name: 'app_browser')]
     public function index(): Response
     {
-        return $this->render('browser.html.twig');
+        return $this->render('browser.html.twig',[
+            'url_content' => 'it works'
+        ]);
     }
 }
