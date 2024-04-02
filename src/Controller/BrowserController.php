@@ -7,10 +7,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use voku\helper\HtmlMin;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class BrowserController extends AbstractController
 {
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     // Remove all the occurences of tag $tag if they contain string $criteria
     private function removeTagIfContains($html, $startTag, $endTag, $criteria): String {
         $tempContent = $html;
@@ -28,17 +37,15 @@ class BrowserController extends AbstractController
         return $html;
     }
 
-    #[Route('/browser', name: 'app_browser')]
-    public function index(Request $request): Response
+    #[Route('/{slug}', name: 'app_index', requirements: ['slug'=>'.*'])]
+    public function index($slug): Response
     {
-        // Get the url-encoded url that we want to browse
-        $url = urldecode( $request->query->get('p') );
-
         // Create the http client
         $httpClient = HttpClient::create();
+        $baseUrl = 'https://premiertablelinens.com/';
 
         // Make the HTTP request to fetch the content
-        $response = $httpClient->request('GET', $url);
+        $response = $httpClient->request('GET', $baseUrl . $slug);
 
         // Get the content of the response
         $content = $response->getContent();
