@@ -4,7 +4,11 @@ Web Proxy for removing specific html tags from other websites
 ## Configure a VPS for hosting this app
 Get an Ubuntu VPS and follow the following steps
 
-1. apt -y update
+
+1. Update the linux packages list
+
+    `apt -y update`
+
 2. apt -y install apache2 php-xml php libapache2-mod-php composer certbot python3-certbot-apache
 3. ln -s /etc/apache2/mods-available/php.load /etc/apache2/mods-enabled/
 4. certbot --apache -d fake.premiertablelinens.com
