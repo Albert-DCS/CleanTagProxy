@@ -9,7 +9,12 @@ Get an Ubuntu VPS and follow the following steps
 
     `apt -y update`
 
-2. apt -y install apache2 php-xml php libapache2-mod-php composer certbot python3-certbot-apache
+2. Install required packages
+
+    ```
+    apt -y install apache2 php-xml php libapache2-mod-php composer certbot python3-certbot-apache
+    ```
+    
 3. ln -s /etc/apache2/mods-available/php.load /etc/apache2/mods-enabled/
 4. certbot --apache -d fake.premiertablelinens.com
 5. a2dissite 000-default
