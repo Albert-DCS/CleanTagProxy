@@ -1,6 +1,6 @@
 # Fake PTL website
 
-**Fake PTL** is a proxy website for *Semrush* to be able to crawl the *PTL*.
+**Fake PTL** is a proxy website for *Semrush* to be able to crawl the *PTL* real website.
 
 ```mermaid
 flowchart LR
