@@ -1,5 +1,23 @@
-# CleanTagProxy
-Web Proxy for removing specific html tags from other websites
+# Fake PTL website
+
+**Fake PTL** is a proxy website for *Semrush* to be able to crawl the *PTL* real website.
+
+```mermaid
+flowchart LR
+    A[Semrush] <--> B{FakePTL website}
+    B <--> C[PTL website]
+```
+
+Currently, the *Semrush* limitation for crawling *PTL* website is due to the big size of PTL pages. This issue is mainly caused by the WSAIO app that cannot be removed. What **FakePTL** does is to act as a man-in-the-middle, *Semrush* will crawl *FakePTL* and *FakePTL* will return a minified version of *PTL* content, without the WSAIO JavaScript code.
+
+```mermaid
+sequenceDiagram
+    Semrush->>+FakePTL: GET fakeptl/something
+    FakePTL->>+PTL: GET ptl/something
+    PTL->>+FakePTL: something big
+    Note over FakePTL: Processing
+    FakePTL->>+Semrush: something small
+```
 
 ## Configure a VPS for hosting this app
 Get an Ubuntu VPS and follow the following steps
